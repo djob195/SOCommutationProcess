@@ -1,0 +1,24 @@
+#include <conio.h>
+#include <dos.h>
+#include<stdlib.h>
+#include "mouse.h"
+#include "timer.h"
+#include "render.h"
+
+int main(void)
+{
+	RenderKernel *render = new RenderKernel();
+	startClock();
+	int exitFlag = 0;
+	mData* mouseData;
+	while (exitFlag==0)
+	{
+		mouseData = isClicked();
+		if(mouseData->isClick == 1)
+		{
+		       cprintf("is click: %x %y",mouseData->mouseX,mouseData->mouseY);
+		}
+	}
+	stopClock();
+	return 0;
+}

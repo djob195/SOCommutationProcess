@@ -1,0 +1,25 @@
+#include <dos.h>
+#include "mouse.h"
+#define MOUSEINTERRUPT 51
+extern "C"
+{
+	struct mData* isClicked (void)
+	{
+		mData* mouseData;
+		union REGS regIn;
+		union REGS regOut;
+		regIn.x.ax = 3;
+		int86 (MOUSEINTERRUPT, &regIn, &regOut);
+		if(regOut.x.bx == 1)
+		{
+			mouseData.isClick = 1;
+			mouseData.mouseX = (regOut.x.cx%8)+1;
+			mouseData.mouseY = (regOut.x.dx%8)+1;
+		}
+		else
+		{
+			mouseData.isClick = 0;
+		}
+		return mouseData;
+	}
+}
