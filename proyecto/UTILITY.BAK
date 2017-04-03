@@ -1,8 +1,8 @@
 #include <dos.h>
 #include "utility.h"
 #include <conio.h>
-#define YPOSUTILITY  46
-#define XPOSUTILITY  5
+#define XPOSUTILITY     46
+#define YMINPOSUTILITY  5
 
 #define KEYWORDERROR1   "Error 1: No se ha tecleado un comando correcto"
 #define KEYWORDERROR2   "Error 2: no se ha escrito un numero entero"
@@ -12,18 +12,9 @@
 
 extern "C"
 {
-	void clearcmd(void)
-	{
-		for(int i = 0; i < 72; i++)
-		{
-			gotoxy(XPOSUTILITY + i, YPOSUTILITY);
-			cprintf(" ");
-		}	
-	}
     void getError(int error)
     {
-	clearcmd();
-        gotoxy(XPOSUTILITY,YPOSUTILITY);
+        gotoxy(XPOSUTILITY,YMINPOSUTILITY);
         switch(error)
         {
             case 1:{
@@ -43,7 +34,7 @@ extern "C"
                 break;
             }
             case 5:{
-		cprintf("%s",MOUSEERROR5);
+                cprintf("%s",KEYWORDERROR5);
                 break;
             }
             default: break;
@@ -51,8 +42,7 @@ extern "C"
     }
 
     void getMessage(char * message){
-	clearcmd();
-        gotoxy(XPOSUTILITY,YPOSUTILITY);
+        gotoxy(XPOSUTILITY,YMINPOSUTILITY);
         cprintf("%s",message);
     }
 }

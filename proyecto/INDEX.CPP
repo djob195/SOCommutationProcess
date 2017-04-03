@@ -12,20 +12,15 @@ int main(void)
 	startClock();
 	int exitFlag = 0;
 	mData* mouseData;
-	kData keywordData;
+	gotoxy(5,46);
 	while (exitFlag==0)
 	{
-		gotoxy(5,46);
-		mouseData = isClicked();
+		/*mouseData = isClicked();
 		if(mouseData->isClick == 1)
 		{
 		       cprintf("is click: %d %d",mouseData->mouseX,mouseData->mouseY);
-		}
-		keywordData = EstadoTecl();
-		if(keywordData.isWork == 1)
-		{
-		       cprintf("key: %d",keywordData.caracter);
-		}
+		}*/
+		isKeyPress();
 	}
 	stopClock();
 	return 0;
