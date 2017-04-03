@@ -116,6 +116,9 @@ extern "C"
 				return token;
 			}
 			token.num = atoi(word);
+			gotoxy(5,41);
+			cprintf("word: %d ", token.num);
+			getch();
 		}			
 		token.type = state;
 		token.word = word;
@@ -189,7 +192,7 @@ extern "C"
 					getError(2);
 					return comando;
 				}
-				int stats = token.num;
+				int stats = token.num
 				if (stats != 1)
 				{
 					getError(2);
@@ -234,6 +237,9 @@ extern "C"
 					return comando;
 				}
 				token = tomaToken(prueba);
+				gotoxy(41,5);
+				cprintf("word: %d type: %d", token.num,token.type);
+				getch();
 				prueba = token.pointer;
 				window = inWindow(token);
 				if(window  < 0)
