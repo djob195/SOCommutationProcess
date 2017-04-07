@@ -38,4 +38,8 @@ extern "C"
 	{
 		 return countClock; 
 	}
+	void resetTimer(void)
+	{
+		countClock = 0;
+	}
 }

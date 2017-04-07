@@ -9,4 +9,5 @@ extern "C"
 	void startClock(void);
 	void stopClock(void);
 	int getTimer(void);
+	void resetTimer(void);
 }

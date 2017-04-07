@@ -7,7 +7,7 @@
 #include <graphics.h> 
 #include "render.h"
 
-#define DELAYBLINK	5000
+#define DELAYBLINK		5000
 #define FREESPACEX      25
 #define FREESPACEY      19
 #define OFFSETX         3
@@ -129,23 +129,37 @@ int RenderKernel::getFreeSpaceY()
 {
     return (YMAXSCREEN-YMINSCREEN) / YMAXWINDOW;
 }
-int RenderKernel::getWindows(int x, int y)
+struct pointPCB RenderKernel::getWindows(int x, int y)
 {
+	struct pointPCB point;
+	point.error = 0;
+	point.x = 0;
+	point.y = 0;
+	point.z = 0;
     if( (XMINSCREEN >= x) || (x >= XMAXSCREEN) || (YMINSCREEN >= y) || (y >= YMAXSCREEN) )
     {
-		return -5;
+		point.error = -5;
+		return point;
     }
     if (y == UISEPARATE)
     {
-		return -5;
+		point.error = -5;
+		return point;
     }
-    if ( ((x-OFFSETX) % FREESPACEX == 0 ) && ((y-OFFSETY) % FREESPACEY == 0 ) )
+	point.x =(x-OFFSETX) % FREESPACEX;
+	point.y =(y-OFFSETY) % FREESPACEY;
+    if ( (point.x == 0 ) && ( point.y  == 0 ) )
     {
-        return -5;
+		point.error = -5;
+		return point;
     }
     int xRelativePos = (x-OFFSETX) / getFreeSpaceX();
     int yRelativePos = (y-OFFSETY) / getFreeSpaceY();
-    return xRelativePos + (yRelativePos*(XMAXSCREEN));
+	point.x--;
+	point.y--;
+	point.z = xRelativePos + (yRelativePos*(XMAXSCREEN)); 
+
+    return point;
 }
 }
 #endif
